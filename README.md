@@ -7,3 +7,4 @@
 # Whoever reaches 5 points first, wins. 
 # 
 # Link to game: https://quirky-jang-b9950e.netlify.app/
+# Link to rough wireframe: https://wireframe.cc/sntXNy

@@ -8,17 +8,28 @@
 // whoever gets five points first, wins 
 // ask if the player wants to play again
 
-// create buttons
-let playBtn = document.getElementById("playBtn");
-let rulesBtn = document.getElementById("rulesBtn");
+// connect buttons to javascript
+const playBtn = document.getElementById("playBtn");
+const rulesBtn = document.getElementById("rulesBtn");
+
+// connect other elements to js
+const rules = document.getElementById("rules")
 
 
 function play() {
     alert("clicked")
 }
-function getRules() {
-    alert("clicked")
+
+function showRules() {
+    if(rules.firstChild) {
+        rules.removeChild(rules.firstChild)
+        return;
+    } 
+    let howToPlay = document.createElement("p")
+    howToPlay.textContent = "A random number is chosen between 1-100. Compete against the computer to guess the number. Whoever guesses the number first, gets a point. Whoever reaches 5 points first, wins."
+    rules.appendChild(howToPlay)
 }
 
+
 playBtn.addEventListener("click", play)
-rulesBtn.addEventListener("click", getRules)
+rulesBtn.addEventListener("click", showRules)

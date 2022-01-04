@@ -7,3 +7,18 @@
 // if the computer guesses before the player does, the computer gets a point
 // whoever gets five points first, wins 
 // ask if the player wants to play again
+
+// create buttons
+let playBtn = document.getElementById("playBtn");
+let rulesBtn = document.getElementById("rulesBtn");
+
+
+function play() {
+    alert("clicked")
+}
+function getRules() {
+    alert("clicked")
+}
+
+playBtn.addEventListener("click", play)
+rulesBtn.addEventListener("click", getRules)

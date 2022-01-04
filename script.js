@@ -8,8 +8,6 @@
 // whoever gets five points first, wins 
 // ask if the player wants to play again
 
-
-
 // connect buttons to javascript
 const playBtn = document.getElementById("playBtn");
 const rulesBtn = document.getElementById("rulesBtn");
@@ -22,15 +20,30 @@ const computerScore = document.getElementById("computerScore")
 const guessLabel = document.getElementById("guessLabel")
 const guessInput = document.getElementById("guessInput")
 
+// disables player from inputting a number
+guessInput.disabled = true;
 
-hide()
-
+let randNum = Math.floor(Math.random() * 100)
 
 function play() {
 
-    show()
     playBtn.disabled = true;
-    rules.removeChild(rules.firstChild);
+    guessInput.disabled = false;
+    if(rules.firstChild) {
+        rules.removeChild(rules.firstChild);
+    }
+
+    console.log(randNum)
+
+    // computer chooses random number
+    // player types random number into input and stores value
+    // if number that player chooses is greater than random number
+    // say that the number is smaller
+    // else if the number the player chooses is less than the rand num
+    // say that the num is larger
+    // else if either computer or user picks the correct number
+    // add points to points 
+    // 
 }
 
 function showRules() {

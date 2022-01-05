@@ -12,14 +12,13 @@
         
         <h1>Guess The Number</h1>
         <br>
-        <div>Guess a number between 1 - 100</div>
-        <div>First to 5 wins</div>
-        <br>
         <div id="playerScore">Player Score:</div>
         <div id="computerScore">Computer Score:</div>
         <br>
-        <label for="guessNumber" id="guessLabel">Guess Number:</label>
-        <input type="text" id="guessInput">
+        <label for="guessNumber" id="guessLabel">Enter number:</label>
+        <input type="form" name="guessInput" id="guessInput" required>
+        <button for="guessInput" type="submit" id="guessBtn">Guess</button>
+        <div id="highOrLow"></div>
         <br><br>
         <button id="playBtn">Play</button>
         <button id="rulesBtn">How To Play</button>

@@ -8,12 +8,11 @@
 // whoever gets five points first, wins 
 // ask if the player wants to play again
 
-// connect buttons to javascript
+// connect elements to javascript
 const playBtn = document.getElementById("playBtn");
 const rulesBtn = document.getElementById("rulesBtn");
 const guessBtn = document.getElementById("guessBtn");
 
-// connect other elements to js
 const rules = document.getElementById("rules");
 const playerScore = document.getElementById("playerScore");
 const computerScore = document.getElementById("computerScore");
@@ -37,6 +36,7 @@ let randNum = Math.floor(Math.random() * 100);
 let computerGuess;
 let max = 100;
 let min = 1;
+let message = document.createElement("p")
 
 // disables player from inputting a number
 guessInput.disabled = true;
@@ -57,119 +57,61 @@ function playerGuess() {
 
     let guess = guessInput.value;
 
-    // removes message if there is one
-    if (highOrLow.firstChild) {
-        highOrLow.removeChild(highOrLow.firstChild)
-    }
-    // ends game if anyone gets 5 points
-    if (pScore === 5 || compScore === 5) {
-        alert("game over")
-        guessInput.disabled = true;
-        guessBtn.disabled = true;
-        return;
-    }
-
-    let message = document.createElement("p")
+    removeDisplay()
+    checkGameOver()
 
     if (guess === "") {
-
-        if (highOrLow.firstChild) {
-            highOrLow.removeChild(highOrLow.firstChild)
-        }
-        setTimeout(function () {
-            message.textContent = "Try again!"
-            highOrLow.appendChild(message)
-        }, 100)
+        removeDisplay()
+        displayMessage("Try again!")
         return;
-
     } else if (guess > randNum) {
-
         computerGuesses()
-
-        if (highOrLow.firstChild) {
-            highOrLow.removeChild(highOrLow.firstChild)
-        }
-        setTimeout(function () {
-            message.textContent = "Guess lower"
-            highOrLow.appendChild(message)
-        }, 100)
-
-    } else if (guess < randNum) {
-
-        computerGuesses()
-
-        if (highOrLow.firstChild) {
-            highOrLow.removeChild(highOrLow.firstChild)
-        }
-        setTimeout(function () {
-            message.textContent = "Guess higher"
-            highOrLow.appendChild(message)
-        }, 100)
-
-    } else if (guess == randNum) {
-
-        if (highOrLow.firstChild) {
-            highOrLow.removeChild(highOrLow.firstChild)
-        }
-        setTimeout(function () {
-            pScore++;
-            alert("You got a point!")
-            score1.textContent = pScore;
-            playerScore.appendChild(score1)
-            randNum = Math.floor(Math.random() * 100)
-            computerGuess = Math.floor(Math.random() * 100);
-            max = 100;
-            min = 1;
-            guessInput.value = "";
-            usedNums = []
-
-            if (highOrLow.firstChild) {
-                highOrLow.removeChild(highOrLow.firstChild)
-            }
-
-            if (pScore === 5 || compScore === 5) {
-                alert("game over")
-                guessInput.disabled = true;
-                guessBtn.disabled = true;
-                return;
-            }
-        }, 150)
-
-    } else {
-        if (highOrLow.firstChild) {
-            highOrLow.removeChild(highOrLow.firstChild)
-        }
-        setTimeout(function () {
-            message.textContent = "Try again!"
-            highOrLow.appendChild(message)
-        }, 100)
+        removeDisplay()
+        displayMessage("Guess lower")
         return;
+    } else if (guess < randNum) {
+        computerGuesses()
+        removeDisplay()
+        displayMessage("Guess higher")
+        return;
+    } else if (guess == randNum) {
+        removeDisplay()
+        displayMessage("You got a point! Enter a new number.")
 
+        pScore++;
+        score1.textContent = pScore;
+        playerScore.appendChild(score1)
+        randNum = Math.floor(Math.random() * 100)
+        computerGuess = Math.floor(Math.random() * 100);
+        max = 100;
+        min = 1;
+        guessInput.value = "";
+        usedNums = []
+        removeDisplay()
+        checkGameOver()
+        return;
+    } else {
+        removeDisplay()
+        displayMessage("Try again!")
+        return;
     }
 }
 
 
 function computerGuesses() {
 
-    if (highOrLow.firstChild) {
-        highOrLow.removeChild(highOrLow.firstChild)
-    }
+    // x and y
+    // if the num that the computer guesses is greater than the random number 
+    // let x be the new max num?
+    // if lower, let y be the new min?
 
-    if (pScore === 5 || compScore === 5) {
-        alert("game over")
-        guessInput.disabled = true;
-        guessBtn.disabled = true;
-        return;
-    }
 
-    computerGuess = Math.floor(Math.random() * (max - min) + min);
+    removeDisplay()
+    checkGameOver()
+
+    computerGuess = Math.floor(Math.random() * (max - min) - min);
     console.log(`Min: ${min}, Max: ${max}`)
     console.log("Random number: " + randNum)
-
-    if (min === max) {
-        min = 0;
-        max = 100;
-    }
 
     if (computerGuess > randNum) {
 
@@ -178,7 +120,7 @@ function computerGuesses() {
         if (usedNums.includes(computerGuess)) {
             console.log(computerGuess + " already used")
             usedNums.splice(-1)
-            computerGuess = Math.floor(Math.random() * (max - min) + min);
+            computerGuess = Math.floor(Math.random() * (max + min) / 2);
             computerGuesses()
         }
 
@@ -191,12 +133,12 @@ function computerGuesses() {
     if (computerGuess < randNum) {
 
         console.log("current computer guess: " + computerGuess)
-        
+
 
         if (usedNums.includes(computerGuess)) {
             console.log(computerGuess + " already used")
             usedNums.splice(-1)
-            computerGuess = Math.floor(Math.random() * (max - min) + min);
+            computerGuess = Math.floor(Math.random() * (max + min) / 2);
             computerGuesses()
         }
 
@@ -205,7 +147,7 @@ function computerGuesses() {
 
         min = computerGuess;
 
-       
+
         //     computerGuess = Math.floor(Math.random() * (max - min + 1) + min);
         //     console.log("next computer guess: " + computerGuess)
         //     console.log(randNum)
@@ -227,24 +169,36 @@ function computerGuesses() {
         guessInput.value = "";
         usedNums = []
 
-        if (highOrLow.firstChild) {
-            highOrLow.removeChild(highOrLow.firstChild)
-        }
-
-        if (pScore === 5 || compScore === 5) {
-            alert("game over")
-            guessInput.disabled = true;
-            guessBtn.disabled = true;
-            return;
-        }
+        removeDisplay()
+        checkGameOver()
 
     }
 
 }
 
+function checkGameOver() {
+    if (pScore === 5 || compScore === 5) {
+        alert("game over")
+        guessInput.disabled = true;
+        guessBtn.disabled = true;
+        return;
+    }
+}
 
+function displayMessage(msg) {
+    setTimeout(function () {
+        message.textContent = msg;
+        highOrLow.appendChild(message)
+    }, 100)
+}
 
-//
+function removeDisplay() {
+    if (highOrLow.firstChild) {
+        highOrLow.removeChild(highOrLow.firstChild)
+    }
+
+}
+
 function showRules() {
     if (rules.firstChild) {
         rules.removeChild(rules.firstChild);

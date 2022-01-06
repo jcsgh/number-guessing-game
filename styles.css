@@ -5,8 +5,16 @@
 
 #gamediv {
     margin: auto;
-    border: 1px solid black;
-    position: relative;
+    border: 2px solid black;
+    position: center;
     height: 400px;
     width: 400px;
+}
+
+#playerScore p {
+    display: inline-block;
+}
+
+#computerScore p {
+    display: inline-block;
 }

@@ -2,6 +2,8 @@
 const playBtn = document.getElementById("playBtn");
 const rulesBtn = document.getElementById("rulesBtn");
 const guessBtn = document.getElementById("guessBtn");
+const yesBtn = document.getElementById("yes")
+const noBtn = document.getElementById("no")
 
 const rules = document.getElementById("rules");
 const playerScore = document.getElementById("playerScore");
@@ -43,7 +45,25 @@ let message = document.createElement("p")
 guessInput.disabled = true;
 guessBtn.disabled = true;
 
+hideYesAndNoBtns()
+
 function play() {
+
+    pScore = 0;
+    compScore = 0;
+    rounds = 0;
+    element.textContent = rounds;
+    score1.textContent = pScore;
+    score2.textContent = compScore;
+    max = 100;
+    min = 1;
+    randNum = Math.floor(Math.random() * 100);
+    computerGuess = Math.floor(Math.random() * max) + min;
+    usedNums = [];
+    guessInput.value = "";
+
+    removeDisplay()
+    hideYesAndNoBtns()
 
     playBtn.disabled = true;
     guessInput.disabled = false;
@@ -78,16 +98,16 @@ function playerGuess() {
         displayMessage("Guess higher")
         return;
     } else if (guess == randNum) {
+        updatePlayerScore()
         removeDisplay()
         setTimeout(function() {
-            displayMessage("You got a point! Enter a new number.")
+            displayMessage(`You got a point! The number was ${randNum}. Enter a new number.`)
         }, 100)
+        setTimeout(function() {
+            randNum = Math.floor(Math.random() * 100)
+        }, 110)
         
 
-        pScore++;
-        score1.textContent = pScore;
-        playerScore.appendChild(score1)
-        randNum = Math.floor(Math.random() * 100)
         computerGuess = Math.floor(Math.random() * 100);
         max = 100;
         min = 1;
@@ -147,7 +167,7 @@ function computerGuesses() {
         usedNums.push(computerGuess)
         console.log(usedNums)
 
-        checkNum()
+        checkRandNum()
 
        
 
@@ -166,7 +186,7 @@ function computerGuesses() {
         console.log("Min: " + min)
         usedNums.push(computerGuess)
         console.log(usedNums)
-        checkNum()
+        checkRandNum()
         
 
         //     computerGuess = Math.floor(Math.random() * (max - min + 1) + min);
@@ -176,15 +196,15 @@ function computerGuesses() {
     }
 
     if (computerGuess === randNum) {
-
-        compScore++;
+        updateCompScore()
         removeDisplay()
         setTimeout(function() {
-            displayMessage("The computer guessed correctly. Enter a new number!")
+            displayMessage(`The computer guessed correctly. The number was ${randNum}. Enter a new number!`)
         }, 100)
-        score2.textContent = compScore;
-        computerScore.appendChild(score2)
-        randNum = Math.floor(Math.random() * 100)
+        setTimeout(function() {
+            randNum = Math.floor(Math.random() * 100)
+        }, 110)
+        
         computerGuess = Math.floor(Math.random() * max) + min;
         max = 100;
         min = 1;
@@ -197,7 +217,7 @@ function computerGuesses() {
 
 }
 
-function checkNum() {
+function checkRandNum() {
     computerGuess = Math.floor(Math.random() * max / 2) + min;
     for(let i = 0; i <= usedNums.length; i++) {
         if (usedNums[i] === computerGuess || computerGuess > 100) {
@@ -212,6 +232,7 @@ function checkGameOver() {
         setTimeout(function() {
             displayMessage("You won! Game over. Would you like to play again?")
         }, 100)
+        showYesAndNoBtns()
         guessInput.disabled = true;
         guessBtn.disabled = true;
         return;
@@ -219,6 +240,7 @@ function checkGameOver() {
         setTimeout(function() {
             displayMessage("The computer won. Game over. Would you like to play again?")
         }, 100)
+        showYesAndNoBtns()
         guessInput.disabled = true;
         guessBtn.disabled = true;
         return;
@@ -255,6 +277,33 @@ function updateRound() {
     round.appendChild(element)
 }
 
+function updatePlayerScore() {
+    pScore++;
+    score1.textContent = pScore;
+    playerScore.appendChild(score1)
+}
+
+function updateCompScore() {
+    compScore++;
+    score2.textContent = compScore;
+    computerScore.appendChild(score2)
+}
+
+function hideYesAndNoBtns() {
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+}
+
+function showYesAndNoBtns() {
+    yesBtn.style.display = "block";
+    noBtn.style.display = "block";
+}
+
+function endGame() {
+    displayMessage("Hope you had fun!")
+    hideYesAndNoBtns()
+}
+
 // function hide() {
 //     playerScore.style.display = "none";
 //     computerScore.style.display = "none";
@@ -273,4 +322,6 @@ function updateRound() {
 playBtn.addEventListener("click", play)
 rulesBtn.addEventListener("click", showRules)
 guessBtn.addEventListener("click", playerGuess)
+yesBtn.addEventListener("click", play)
+noBtn.addEventListener("click", endGame)
 

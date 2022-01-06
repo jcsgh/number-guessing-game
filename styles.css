@@ -1,9 +1,6 @@
 /*
- TO do: 
-
- center everything in webpage 
- pick a color theme 
- pick background image (if necessary)
+ To do: 
+ 
  pick font-family
 
  add sounds: 
@@ -16,28 +13,45 @@
 */
 
 *{
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 }
 
-html { 
-    background: url(images/bg.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+header {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: hidden;
+}
+
+header video {
+    /* Make video to at least 100% wide and tall */
+  min-width: 100%; 
+  min-height: 100%; 
+
+  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+  width: auto;
+  height: auto;
+
+  /* Center the video */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 
 #gamediv {
     margin: auto;
     padding: 100px;
-    border: 2px solid black;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
     text-align: center;
 
     

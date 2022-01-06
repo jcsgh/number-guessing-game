@@ -1,14 +1,33 @@
+/*
+ TO do: 
+
+ center everything in webpage 
+ pick a color theme 
+ pick background image (if necessary)
+ pick font-family
+
+ add sounds: 
+ mysterious music for background music
+ sound for button clicks 
+ sound for when user wins or when computer wins
+
+ 
+
+*/
+
 *{
     padding: 0px;
     margin: 0px;
 }
 
 #gamediv {
-    margin: auto;
+    margin-right: 25%;
+    margin-left: 25%;
+    padding: 100px;
     border: 2px solid black;
-    position: center;
-    height: 400px;
-    width: 400px;
+    height: 50%;
+    width: 50%;
+    border-radius: 5px;
 }
 
 #playerScore p {

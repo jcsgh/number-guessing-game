@@ -1,4 +1,4 @@
-// connect elements to html
+
 const playBtn = document.getElementById("playBtn");
 const rulesBtn = document.getElementById("rulesBtn");
 const guessBtn = document.getElementById("guessBtn");
@@ -10,8 +10,11 @@ const playerScore = document.getElementById("playerScore");
 const computerScore = document.getElementById("computerScore");
 const guessLabel = document.getElementById("guessLabel");
 const guessInput = document.getElementById("guessInput");
-const highOrLow = document.getElementById("highOrLow");
+const higherOrLower = document.getElementById("higherOrLower");
 const round = document.getElementById("round")
+const computerStatus = document.getElementById("computerStatus")
+
+let status = document.createElement("p");
 
 // score variables
 let pScore = 0;
@@ -62,8 +65,11 @@ function play() {
     usedNums = [];
     guessInput.value = "";
 
-    removeDisplay()
+    removeDisplayMessage()
     hideYesAndNoBtns()
+
+    // add function to display typing message from computer
+    computerGuesses()
 
     playBtn.disabled = true;
     guessInput.disabled = false;
@@ -74,32 +80,34 @@ function play() {
 
 }
 
+// add win streak 
+// add an elements that shows when the computer has chosen a number
 
 
 function playerGuess() {
 
     let guess = guessInput.value;
 
-    removeDisplay()
+    removeDisplayMessage()
     checkGameOver()
 
     if (guess === "") {
-        removeDisplay()
+        removeDisplayMessage()
         displayMessage("Try again!")
         return;
     } else if (guess > randNum) {
         computerGuesses()
-        removeDisplay()
+        removeDisplayMessage()
         displayMessage("Guess lower")
         return;
     } else if (guess < randNum) {
         computerGuesses()
-        removeDisplay()
+        removeDisplayMessage()
         displayMessage("Guess higher")
         return;
     } else if (guess == randNum) {
         updatePlayerScore()
-        removeDisplay()
+        removeDisplayMessage()
         setTimeout(function() {
             displayMessage(`You got a point! The number was ${randNum}. Enter a new number.`)
         }, 100)
@@ -113,12 +121,12 @@ function playerGuess() {
         min = 1;
         guessInput.value = "";
         usedNums = []
-        removeDisplay()
+        removeDisplayMessage()
         checkGameOver()
         updateRound()
         return;
     } else {
-        removeDisplay()
+        removeDisplayMessage()
         displayMessage("Try again!")
         return;
     }
@@ -136,9 +144,9 @@ function computerGuesses() {
     // has to check whether the number has been used
     // if it has, choose another random num
 
-    removeDisplay()
+    removeDisplayMessage()
     checkGameOver()
-
+    displayComputerStatus()
     // have computer guess max divided by half
     // while (usedNums.includes(max) || usedNums.includes(min)) {
     //     //choose new random num
@@ -196,8 +204,8 @@ function computerGuesses() {
     }
 
     if (computerGuess === randNum) {
-        updateCompScore()
-        removeDisplay()
+        updateComputerScore()
+        removeDisplayMessage()
         setTimeout(function() {
             displayMessage(`The computer guessed correctly. The number was ${randNum}. Enter a new number!`)
         }, 100)
@@ -250,13 +258,13 @@ function checkGameOver() {
 function displayMessage(msg) {
     setTimeout(function () {
         message.textContent = msg;
-        highOrLow.appendChild(message)
+        higherOrLower.appendChild(message)
     }, 10)
 }
 
-function removeDisplay() {
-    if (highOrLow.firstChild) {
-        highOrLow.removeChild(highOrLow.firstChild)
+function removeDisplayMessage() {
+    if (higherOrLower.firstChild) {
+        higherOrLower.removeChild(higherOrLower.firstChild)
     }
 
 }
@@ -283,10 +291,20 @@ function updatePlayerScore() {
     playerScore.appendChild(score1)
 }
 
-function updateCompScore() {
+function updateComputerScore() {
     compScore++;
     score2.textContent = compScore;
     computerScore.appendChild(score2)
+}
+
+function displayComputerStatus() {
+    let randTime = Math.floor(Math.random() * 1000)
+    status.textContent = "Computer is typing...";
+    computerStatus.appendChild(status);
+    setTimeout(function() {
+        status.textContent = "Computer chose a number.";
+        computerStatus.appendChild(status);
+    }, randTime)
 }
 
 function hideYesAndNoBtns() {
@@ -303,21 +321,6 @@ function endGame() {
     displayMessage("Hope you had fun!")
     hideYesAndNoBtns()
 }
-
-// function hide() {
-//     playerScore.style.display = "none";
-//     computerScore.style.display = "none";
-//     guessInput.style.display = "none";
-//     guessLabel.style.display = "none";
-// }
-
-// function show() {
-//     playerScore.style.display = "block";
-//     computerScore.style.display = "block";
-//     guessInput.style.display = "block";
-//     guessLabel.style.display = "block";
-// }
-
 
 playBtn.addEventListener("click", play)
 rulesBtn.addEventListener("click", showRules)

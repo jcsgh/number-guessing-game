@@ -299,7 +299,7 @@ function updateComputerScore() {
 
 function displayComputerStatus() {
     let randTime = Math.floor(Math.random() * 1000)
-    status.textContent = "Computer is typing...";
+    status.textContent = "Computer is thinking...";
     computerStatus.appendChild(status);
     setTimeout(function() {
         status.textContent = "Computer chose a number.";

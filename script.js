@@ -1,4 +1,3 @@
-
 const playBtn = document.getElementById("playBtn");
 const rulesBtn = document.getElementById("rulesBtn");
 const guessBtn = document.getElementById("guessBtn");

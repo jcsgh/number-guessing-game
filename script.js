@@ -40,6 +40,9 @@ let computerGuess = Math.floor(Math.random() * max) + min;
 let usedNums = [];
 let message = document.createElement("p")
 
+const btnClick = new Audio();
+btnClick.src = "buttonClick.mp3"
+
 // disables player from inputting a number
 guessInput.disabled = true;
 guessBtn.disabled = true;
@@ -270,6 +273,10 @@ function hideYesAndNoBtns() {
 function showYesAndNoBtns() {
     yesBtn.style.display = "block";
     noBtn.style.display = "block";
+}
+
+function playBtnClickAudio() {
+    btnClick.play()
 }
 
 function endGame() {

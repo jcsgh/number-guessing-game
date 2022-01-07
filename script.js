@@ -26,9 +26,6 @@ score2.textContent = compScore;
 playerScore.appendChild(score1);
 computerScore.appendChild(score2);
 
-
-// specify the number of rounds a user wants to play?
-// increase each time there's a next round
 let element = document.createElement("p")
 let rounds = 0;
 element.textContent = rounds;
@@ -67,8 +64,6 @@ function play() {
 
     removeDisplayMessage()
     hideYesAndNoBtns()
-
-    // add function to display typing message from computer
     computerGuesses()
 
     playBtn.disabled = true;
@@ -81,8 +76,6 @@ function play() {
 }
 
 // add win streak 
-// add an elements that shows when the computer has chosen a number
-
 
 function playerGuess() {
 
@@ -135,24 +128,11 @@ function playerGuess() {
 
 function computerGuesses() {
 
-    // x and y
-    // if the num that the computer guesses is greater than the random number 
-    // let x be the new max num?
-    // if lower, let y be the new min?
-
-    // max can't go over 100 and min can't go below 1
-    // has to check whether the number has been used
-    // if it has, choose another random num
 
     removeDisplayMessage()
     checkGameOver()
     displayComputerStatus()
-    // have computer guess max divided by half
-    // while (usedNums.includes(max) || usedNums.includes(min)) {
-    //     //choose new random num
-    //     computerGuess = Math.floor(Math.random() * max) + min;
-    //     break;
-    // } 
+  
     
 
     console.log("Computer Guess: " + computerGuess)
@@ -161,46 +141,22 @@ function computerGuesses() {
     console.log("Random number: " + randNum)
 
     if (computerGuess > randNum) {
-
-        // if (usedNums.includes(computerGuess)) {
-        //     console.log(computerGuess + " already used")
-        //     usedNums.splice(-1)
-        //     computerGuess = Math.floor(Math.random() * (max + min) / 2);
-        //     computerGuesses()
-        // }
-
-        // tell computer the number it entered is greater than random number
-
+    
         max = Math.floor(computerGuess)
         usedNums.push(computerGuess)
         console.log(usedNums)
 
         checkRandNum()
 
-       
-
     }
     if (computerGuess < randNum) {
-
-
-        // if (usedNums.includes(computerGuess)) {
-        //     console.log(computerGuess + " already used")
-        //     usedNums.splice(-1)
-        //     computerGuess = Math.floor(Math.random() * (max + min) / 2);
-        //     computerGuesses()
-        // }
 
         min = Math.floor(computerGuess)
         console.log("Min: " + min)
         usedNums.push(computerGuess)
         console.log(usedNums)
         checkRandNum()
-        
-
-        //     computerGuess = Math.floor(Math.random() * (max - min + 1) + min);
-        //     console.log("next computer guess: " + computerGuess)
-        //     console.log(randNum)
-
+    
     }
 
     if (computerGuess === randNum) {
@@ -298,7 +254,7 @@ function updateComputerScore() {
 }
 
 function displayComputerStatus() {
-    let randTime = Math.floor(Math.random() * 1000)
+    let randTime = Math.floor(Math.random() * 2000)
     status.textContent = "Computer is thinking...";
     computerStatus.appendChild(status);
     setTimeout(function() {

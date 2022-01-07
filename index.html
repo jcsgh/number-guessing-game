@@ -8,12 +8,9 @@
     <title>Guess The Number</title>
 </head>
 <body>
-    <header>
-        <!-- <video src="" muted loop autoplay></video> -->
-        <h1>Guess The Number</h1>
-        <br>
-    </header>
+    
     <div id="gamediv">
+        <h1>Guess The Number</h1>
         <div id="round">Round: </div>
         <br>
         <div id="playerScore">Player Score: </div>
@@ -30,8 +27,12 @@
         <button id="playBtn">Play</button>
         <button id="rulesBtn">How To Play</button>
         <div id="rules"></div>
-        
     </div>
+
+    <video id="videoBG" poster="poster.png" muted loop autoplay>
+        <source src="numbers.mp4" type="video/mp4">
+    </video>
+
     <script src="script.js"></script>
 </body>
 </html>

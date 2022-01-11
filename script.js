@@ -52,8 +52,8 @@ let message = document.createElement("p")
 let btnClick = new Audio();
 btnClick.src = "buttonClick.mp3";
 
+// plays sound when button is clicked
 function playBtnClick() {
-    alert("should play")
     btnClick.play()
 }
 

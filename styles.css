@@ -1,12 +1,13 @@
 /*
  TASKS:
-
- pick font-family
-
- add sounds: 
  mysterious music for background music
- sound for button clicks 
  sound for when user wins or when computer wins
+
+ how can I make this game better than it is?
+
+ make it about cracking a code faster than the thief? 
+add music
+add harder levels 
 
 */
 
@@ -17,6 +18,7 @@
   color: white;
   width: 75%;
   margin: 2em auto;
+  margin-top: 17em;
   font: 1em/1.3 'Source Code Pro', monospace;
   text-align: center;
 }

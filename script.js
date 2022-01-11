@@ -41,21 +41,23 @@ winStreak.appendChild(winStatus)
 let max = 100;
 let min = 1;
 
+// stores a random number from 1 - 100 for both player and computer
 let randNum = Math.floor(Math.random() * 100);
 let computerGuess = Math.floor(Math.random() * max) + min;
 
+// array to store numbers that computer guessed
 let usedNums = [];
 let message = document.createElement("p")
-
 
 let btnClick = new Audio();
 btnClick.src = "buttonClick.mp3";
 
-function playBtnClickAudio() {
+function playBtnClick() {
+    alert("should play")
     btnClick.play()
 }
 
-// disables player from inputting a number
+// disables player from inputing a number
 guessInput.disabled = true;
 guessBtn.disabled = true;
 
@@ -88,8 +90,7 @@ function play() {
     }
 
 }
-
-// add win streak 
+ 
 
 function playerGuess() {
 
@@ -142,12 +143,9 @@ function playerGuess() {
 
 function computerGuesses() {
 
-
     removeDisplayMessage()
     checkGameOver()
     displayComputerStatus()
-  
-    
 
     console.log("Computer Guess: " + computerGuess)
 

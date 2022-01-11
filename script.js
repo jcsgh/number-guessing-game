@@ -12,23 +12,30 @@ const guessInput = document.getElementById("guessInput");
 const higherOrLower = document.getElementById("higherOrLower");
 const round = document.getElementById("round")
 const computerStatus = document.getElementById("computerStatus")
+const winStreak = document.getElementById("winStreak")
 
 let status = document.createElement("p");
 
 // score variables
 let pScore = 0;
 let compScore = 0;
+let rounds = 0;
+let numWins = 0;
+
 let score1 = document.createElement("p");
 let score2 = document.createElement("p");
+let element = document.createElement("p")
+let winStatus = document.createElement("p")
+
 score1.textContent = pScore;
 score2.textContent = compScore;
+element.textContent = rounds;
+winStatus.textContent = numWins;
+
 playerScore.appendChild(score1);
 computerScore.appendChild(score2);
-
-let element = document.createElement("p")
-let rounds = 0;
-element.textContent = rounds;
 round.appendChild(element)
+winStreak.appendChild(winStatus)
 
 // other variables
 let max = 100;
@@ -40,8 +47,13 @@ let computerGuess = Math.floor(Math.random() * max) + min;
 let usedNums = [];
 let message = document.createElement("p")
 
-const btnClick = new Audio();
-btnClick.src = "buttonClick.mp3"
+
+let btnClick = new Audio();
+btnClick.src = "buttonClick.mp3";
+
+function playBtnClickAudio() {
+    btnClick.play()
+}
 
 // disables player from inputting a number
 guessInput.disabled = true;
@@ -178,7 +190,6 @@ function computerGuesses() {
         guessInput.value = "";
         updateRound()
         checkGameOver()
-
     }
 
 }
@@ -195,6 +206,7 @@ function checkRandNum() {
 
 function checkGameOver() {
     if (pScore === 5) {
+        updateWinStreak()
         setTimeout(function() {
             displayMessage("You won! Game over. Would you like to play again?")
         }, 100)
@@ -275,8 +287,10 @@ function showYesAndNoBtns() {
     noBtn.style.display = "block";
 }
 
-function playBtnClickAudio() {
-    btnClick.play()
+function updateWinStreak() {
+    numWins++;
+    winStatus.textContent = numWins;
+    winStreak.appendChild(winStatus)
 }
 
 function endGame() {

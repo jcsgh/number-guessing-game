@@ -35,6 +35,10 @@ add harder levels
   display: inline-block;
 }
 
+#winStreak p {
+  display: inline-block;
+}
+
 #videoBG {
   position: fixed;
   z-index: -1;
